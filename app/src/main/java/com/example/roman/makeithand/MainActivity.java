@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 String title = data.getStringExtra("title");
                 String value = data.getStringExtra("value");
-                new HandwritingWorker().execute(value);
+                new HandwritingWorker(this).execute(title, value);
             }
         }
     }
