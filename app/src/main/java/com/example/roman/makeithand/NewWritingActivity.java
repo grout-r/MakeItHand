@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NewWriting extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class NewWritingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class NewWriting extends AppCompatActivity {
         save_button = (Button) findViewById(R.id.save_button);
         et_title = (EditText) findViewById(R.id.et_title);
         et_value = (EditText) findViewById(R.id.et_value);
+
 
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,5 +59,6 @@ public class NewWriting extends AppCompatActivity {
     Button save_button;
     EditText et_title;
     EditText et_value;
+
     Context c;
 }

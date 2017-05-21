@@ -5,4 +5,9 @@
     <string name="cancel_button">Cancel</string>
     <string name="please_title">Add your title</string>
     <string name="please_value">Add your text</string>
+    <string name="orignal_text">Original text :</string>
+    <string name="back">Back</string>
+    <string name="wish_delete">Do you wish to delete this writing ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

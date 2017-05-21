@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -25,7 +27,7 @@ import java.util.Calendar;
  * Created by Roman on 20/05/2017.
  */
 
-public class HandwritingWorker extends AsyncTask<String, String, String>
+public class HandwritingWorker extends AsyncTask<String, String, Writing>
 {
     HandwritingWorker(MainActivity activity)
     {
@@ -34,7 +36,13 @@ public class HandwritingWorker extends AsyncTask<String, String, String>
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+        activity.loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected Writing doInBackground(String... params) {
         try
         {
             Authenticator.setDefault(new Authenticator() {
@@ -44,23 +52,17 @@ public class HandwritingWorker extends AsyncTask<String, String, String>
                 }
             });
 
-            Log.d("ICI", "Ici");
             URL url = new URL("https://api.handwriting.io/render/png?handwriting_id=8X3WQ4D800B0&text="+ URLEncoder.encode(params[1], "UTF-8"));
             File file = new File(activity.getExternalFilesDir(null) + "/" +  params[0] + "_" + Calendar.getInstance().get(Calendar.SECOND) + ".png");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-
             con.connect();
-            Log.d("response code", String.valueOf(con.getResponseCode()));
-            Log.d("response message", String.valueOf(con.getResponseMessage()));
-
-            Log.d("path",file.getAbsolutePath());
 
             InputStream is = con.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(is);
             FileOutputStream fos = new FileOutputStream(file);
 
-            byte[] buffer = new byte[4 * 1024]; // or other buffer size
+            byte[] buffer = new byte[1024];
             int read;
 
             while ((read = bis.read(buffer)) != -1)
@@ -71,8 +73,7 @@ public class HandwritingWorker extends AsyncTask<String, String, String>
             is.close();
             fos.close();
 
-
-            return "ok";
+            return new Writing (-1, params[0], params[1], file.getAbsolutePath());
         }
 
         catch (MalformedURLException e)
@@ -89,5 +90,20 @@ public class HandwritingWorker extends AsyncTask<String, String, String>
         }
     }
 
-    MainActivity activity;
+    @Override
+    protected void onPostExecute(Writing w) {
+        super.onPostExecute(w);
+        if (w != null)
+        {
+            activity.ctrl.addWriting(w.title, w.value, w.path);
+            activity.refeshList();
+        }
+        else
+        {
+            Toast.makeText(activity, "Something went wrong ...", Toast.LENGTH_LONG).show();
+        }
+        activity.loading.setVisibility(View.GONE);
+    }
+
+    private MainActivity activity;
 }
