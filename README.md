@@ -2,6 +2,11 @@
 
 Android application who will convert user's string into a hand written image thanks to the Handwriting.io API.
 
+## Tech stack
+  Default Android stack. No added libraries.
+  IDE : Android Studio.
+  Android SDK minimum : v25
+
 ## Data Structure : Writing
 
   The Writing object is the model of the app. It contains a title, a value (the user's string) and a path (the image).
