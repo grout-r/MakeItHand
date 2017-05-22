@@ -2,6 +2,8 @@
 
 Android application who will convert user's string into a hand written image thanks to the Handwriting.io API.
 
+Be careful of special characteres like "é", "à", "ç" [...], they are supported bu Handwritting.io
+
 ## Tech stack
   Default Android stack. No added libraries.
   IDE : Android Studio.
