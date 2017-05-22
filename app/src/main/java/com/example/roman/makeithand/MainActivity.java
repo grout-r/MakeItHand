@@ -14,8 +14,18 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
+/**
+ * Main activity. Containing a listview representing the database entries and a "new" button.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Classical init of views.
+     * Set the OnClickListener and initialise the list with the database data.
+     *
+     * @param savedInstanceState
+     *          Default. Use on super constructor
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         lv.setAdapter(aa);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * Trigger the view for display a generated writing
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Writing clicked = dataset.get(position);
@@ -42,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            /**
+             * Trigger the modal to destroy a created writing
+             */
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final Writing writing = dataset.get(position);
@@ -67,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         add_button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Start the activity for a new writing
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewWritingActivity.class);
@@ -75,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * After database changes, refresh the new with the new data.
+     */
     public void refreshList()
     {
         dataset = ctrl.getAllWritings();
@@ -82,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
         lv.setAdapter(aa);
     }
 
+    /**
+     * Handle the ending of a launched activity.
+     * For NEW_WRITING -> OK
+     *          Get the set title and value from the intend, then launch the Async Task with thoses data
+     */
     protected void onActivityResult(int request, int result, Intent data)
     {
         if (request == NEW_WRITING)

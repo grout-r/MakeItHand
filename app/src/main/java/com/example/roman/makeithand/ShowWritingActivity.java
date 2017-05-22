@@ -11,8 +11,14 @@ import android.widget.TextView;
 
 import java.io.File;
 
+/**
+ * Activity for displaying a generated writing.
+ */
 public class ShowWritingActivity extends AppCompatActivity {
 
+    /**
+     * Classic behavior. Load the image file into a bitmap, then set the bitmap to the image view.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

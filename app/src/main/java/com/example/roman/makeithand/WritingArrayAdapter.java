@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Custom ArrayAdapter to display a custom item (Writing) into a List View.
+ * See the official documentation for more information about overriding an ArrayAdapter.
+ */
 class WritingArrayAdapter extends ArrayAdapter<Writing>
 {
     private static class ViewHolder {
@@ -39,8 +43,6 @@ class WritingArrayAdapter extends ArrayAdapter<Writing>
 
         Writing item = getItem(position);
         if (item!= null) {
-            // My layout has only one TextView
-            // do whatever you want with your string and long
             viewHolder.itemView.setText(item.title);
         }
 

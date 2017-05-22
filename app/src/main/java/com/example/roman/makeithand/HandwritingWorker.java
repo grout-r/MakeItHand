@@ -18,20 +18,47 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 
+/**
+ * This class extends the AsyncTask to create a custom one.
+ * The purpose is to have a class that will launch a thread for a specific task.
+ * The task is to communicate with the Handwriting.io API to generate a image containing a Handwritten string.
+ * This is the core functionality of the application.
+ */
 class HandwritingWorker extends AsyncTask<String, String, Writing>
 {
+    /**
+     * Constructor.
+     * @param activity
+     *          Take a reference from the activity where the task is launched.
+     *          Useful for UI update.
+     */
     HandwritingWorker(MainActivity activity)
     {
         super();
         this.activity = activity;
     }
 
+    /**
+     * Automatically called before the async task start. Called in the UI thread.
+     * Set the loading bar to visible.
+     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         activity.loading.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * The task itself of the async task.
+     * It set the default Authenticator to the credentials generated for us by Handwriting.io
+     * Try to resolve the URL of Handwriting.io and connect to it. The parameter are passed with the "?" option in the URL.
+     * Use the HttpURL input stream to fill a buffer who will be emptied in a FileOutputStream, opened with the file path destination.
+     *
+     * @param params
+     *          Varags. params[0] is the title, params[1] is the value.
+     * @return
+     *          Return the new "Writing" object containing the parameter plus the path of the newly created file.
+     */
     @Override
     protected Writing doInBackground(String... params) {
         try
@@ -81,6 +108,18 @@ class HandwritingWorker extends AsyncTask<String, String, Writing>
         }
     }
 
+    /**
+     * Called automatically after the task. Called on the UI thread.
+     * Check that the result of the task is not null.
+     * If not,
+     *      Adding it in database
+     *      Refresh the view
+     * If null,
+     *      Display "something went wrong" in a Toast.
+     * Anyway, set the loading bar to gone.
+     * @param w
+     *      Newly created writing
+     */
     @Override
     protected void onPostExecute(Writing w) {
         super.onPostExecute(w);
@@ -91,7 +130,7 @@ class HandwritingWorker extends AsyncTask<String, String, Writing>
         }
         else
         {
-            Toast.makeText(activity, "Something went wrong ...", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, R.string.oops, Toast.LENGTH_LONG).show();
         }
         activity.loading.setVisibility(View.GONE);
     }

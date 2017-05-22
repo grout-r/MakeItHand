@@ -3,7 +3,9 @@ package com.example.roman.makeithand;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * Model that represent a writing. Implements parcelable to be serialized into and Intent.
+ */
 class Writing implements Parcelable
 {
     Writing(int id, String title, String value, String path)

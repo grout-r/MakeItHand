@@ -10,4 +10,6 @@
     <string name="wish_delete">Do you wish to delete this writing ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="desc_img">Generated Image</string>
+    <string name="oops">Something went wrong …</string>
 </resources>

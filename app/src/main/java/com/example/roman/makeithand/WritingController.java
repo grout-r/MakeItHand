@@ -7,14 +7,34 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+/**
+ * Data controller for Writing.
+ * Contains the database instance.
+ */
 class WritingController
 {
+    /**
+     * Call the database
+     * @param context
+     *          Activity which it is launched.
+     */
     WritingController(Context context)
     {
         MyDBOpenHelper tdb = new MyDBOpenHelper(context, "prod.db", null, 1);
         sdb = tdb.getWritableDatabase();
     }
 
+    /**
+     * Add a new Writing in the database.
+     * @param title
+     *          Writing title.
+     * @param value
+     *          Writing value.
+     * @param path
+     *          Image path.
+     * @return
+     *          Return true.
+     */
     boolean addWriting(String title, String value, String path)
     {
         ContentValues cv = new ContentValues();
@@ -25,7 +45,11 @@ class WritingController
         return true;
     }
 
-
+    /**
+     * Return all the writings to display them on the list view on Main Activity
+     * @return
+     *      An ArrayList with all the Writing instances.
+     */
     ArrayList<Writing> getAllWritings()
     {
         ArrayList<Writing> retVal = new ArrayList<>();
@@ -42,6 +66,11 @@ class WritingController
         return retVal;
     }
 
+    /**
+     * Delete a writing based on his ID.
+     * @param id
+     *          ID to delete.
+     */
     void deleteWriting(int id)
     {
         String table_name = "writings";

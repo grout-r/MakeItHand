@@ -25,7 +25,7 @@
             android:id="@+id/show_img"
             android:adjustViewBounds="true"
             android:layout_marginBottom="20dp"
-            />
+            android:contentDescription="@string/desc_img" />
 
         <TextView
             android:layout_width="match_parent"

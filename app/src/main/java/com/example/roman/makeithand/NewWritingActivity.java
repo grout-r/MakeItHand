@@ -9,8 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Activity for creating a writing.
+ */
 public class NewWritingActivity extends AppCompatActivity {
 
+    /**
+     * Classic behavior. Set the OnClickListener.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,9 @@ public class NewWritingActivity extends AppCompatActivity {
 
 
         cancel_button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Do nothing and finish the activity
+             */
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
@@ -32,6 +41,9 @@ public class NewWritingActivity extends AppCompatActivity {
         });
 
         save_button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Check that all the fields are OK and set the intent with the data to get the data back in the MainActivity.
+             */
             @Override
             public void onClick(View v) {
                 String title = et_title.getText().toString();
