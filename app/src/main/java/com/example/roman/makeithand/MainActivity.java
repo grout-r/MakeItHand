@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ctrl.deleteWriting(writing.id);
-                        refeshList();
+                        refreshList();
                     }
                 });
                 builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -71,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewWritingActivity.class);
-                startActivityForResult(intent, NEWWRITING);
+                startActivityForResult(intent, NEW_WRITING);
             }
         });
     }
 
-    public void refeshList ()
+    public void refreshList()
     {
         dataset = ctrl.getAllWritings();
         aa = new WritingArrayAdapter(this, android.R.layout.simple_list_item_1, dataset);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int request, int result, Intent data)
     {
-        if (request == 1)
+        if (request == NEW_WRITING)
         {
             if (result == RESULT_OK)
             {
@@ -105,5 +104,5 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Writing> dataset;
     Context c;
 
-    int NEWWRITING = 1;
+    int NEW_WRITING = 1;
 }

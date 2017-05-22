@@ -3,11 +3,8 @@ package com.example.roman.makeithand;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Roman on 21/05/2017.
- */
 
-public class Writing implements Parcelable
+class Writing implements Parcelable
 {
     Writing(int id, String title, String value, String path)
     {
@@ -43,7 +40,7 @@ public class Writing implements Parcelable
     }
 
     public int      id;
-    public String   title;
-    public String   value;
-    public String   path;
+    String   title;
+    String   value;
+    String   path;
 }

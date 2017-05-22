@@ -1,6 +1,7 @@
 package com.example.roman.makeithand;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,23 +10,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Roman on 21/05/2017.
- */
-
-public class WritingArrayAdapter extends ArrayAdapter<Writing>
+class WritingArrayAdapter extends ArrayAdapter<Writing>
 {
     private static class ViewHolder {
         private TextView itemView;
     }
 
-    public WritingArrayAdapter(Context context, int textViewResourceId, ArrayList<Writing> items) {
+    WritingArrayAdapter(Context context, int textViewResourceId, ArrayList<Writing> items) {
         super(context, textViewResourceId, items);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent)
     {
 
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(this.getContext())
                     .inflate(android.R.layout.simple_list_item_1, parent, false);
@@ -48,5 +47,4 @@ public class WritingArrayAdapter extends ArrayAdapter<Writing>
         return convertView;
     }
 
-    ViewHolder viewHolder;
 }

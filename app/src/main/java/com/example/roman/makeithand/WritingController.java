@@ -7,15 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-/**
- * Created by Roman on 21/05/2017.
- */
-
-public class WritingController
+class WritingController
 {
     WritingController(Context context)
     {
-        tdb = new MyDBOpenHelper(context, "prod.db", null, 1);
+        MyDBOpenHelper tdb = new MyDBOpenHelper(context, "prod.db", null, 1);
         sdb = tdb.getWritableDatabase();
     }
 
@@ -46,15 +42,13 @@ public class WritingController
         return retVal;
     }
 
-    public void deleteWriting(int id)
+    void deleteWriting(int id)
     {
         String table_name = "writings";
         String where_clause = "ID = ?";
         String []where_args = {String.valueOf(id)};
         sdb.delete(table_name, where_clause, where_args);
     }
-    private MyDBOpenHelper tdb;
+
     private SQLiteDatabase sdb;
-
-
 }

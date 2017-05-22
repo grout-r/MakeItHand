@@ -1,14 +1,9 @@
 package com.example.roman.makeithand;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import org.json.JSONException;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,11 +18,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
 
-/**
- * Created by Roman on 20/05/2017.
- */
-
-public class HandwritingWorker extends AsyncTask<String, String, Writing>
+class HandwritingWorker extends AsyncTask<String, String, Writing>
 {
     HandwritingWorker(MainActivity activity)
     {
@@ -96,7 +87,7 @@ public class HandwritingWorker extends AsyncTask<String, String, Writing>
         if (w != null)
         {
             activity.ctrl.addWriting(w.title, w.value, w.path);
-            activity.refeshList();
+            activity.refreshList();
         }
         else
         {
